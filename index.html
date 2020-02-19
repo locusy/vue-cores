@@ -7,10 +7,49 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="vue-cores"></div>
+    <div id="vue-cores">
 
-    <script>
-        
+    </div>
+
+    <script type="text/javascript">
+        var obj = {}
+        Object.defineProperty(obj, 'name', {
+            configurable: true,  // 该属性描述符才能够被改变 该属性也能从对应的对象上被删除
+            enumerable: true, // 该属性能够出现在对象的枚举属性中
+            get() {
+                // console.log(this)
+                return document.querySelector("#vue-cores").innerHTML
+            },
+            set(value) {
+                // console.log('value:', value)
+                document.querySelector('#vue-cores').innerHTML = value
+            },
+            // 以下两种描述符不能和get set同时存在
+            // writable: true,
+            // value: 'lala'
+        })
+
+        obj.name = 'tiantian'
+        // console.log(obj.name)
     </script>
+
+    <script src="./cvue.js"></script>
+
+    <script type="text/javascript">
+        const app = new CVue({
+            data: {
+                title: 'tianzhi',
+                address: {
+                    province: "hubei"
+                }
+            }
+        })
+        
+        app.$data.title = 'changed'
+        app.$data.address.province = 'tianjing'
+        app.title = 'dingding'
+        app.address.province = 'beijng'
+    </script>
+    
 </body>
 </html>
