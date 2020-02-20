@@ -2,7 +2,7 @@
  * @Author: tianzhi
  * @Date: 2020-02-19 21:13:59
  * @LastEditors  : tianzhi
- * @LastEditTime : 2020-02-19 23:12:40
+ * @LastEditTime : 2020-02-20 12:07:15
  */
 class CVue {
     constructor(options) {
@@ -10,6 +10,10 @@ class CVue {
         this.$data = options.data
         
         this.observe(this.$data)
+
+        new Watcher()
+        this.$data.title
+        this.$data.title = 'new val'
     }
     observe(value) {
         if(!value || typeof value != 'object') {
@@ -32,19 +36,48 @@ class CVue {
         })
     }
     defineReactive(obj, key, val)  {
+        /**
+         * 发布订阅模式
+         * 一个key只有一个dep，对应的是数据
+         * 一个dep里面包含多个watcher, 对应的是视图中的多个地方
+         */
+        const dep = new Dep();
         Object.defineProperty(obj, key, {
             get() {
+                Dep.target && dep.addDep(Dep.target)
                 return val
             },
             set(newVal) {
                 if(newVal != val) {
                     val = newVal
-                    console.log(`${key}更新了，${newVal}`)
+                    // console.log(`${key}更新了，${newVal}`)
+                    dep.notify()
                 }
             }
         })
 
         // 递归 让data里面内层的对象也可以响应
         this.observe(val)
+    }
+}
+
+class Dep {
+    constructor() {
+        this.deps = []
+    }
+    addDep(watcher) {
+        this.deps.push(watcher)
+    }
+    notify() {
+        this.deps.forEach(watcher => watcher.update())
+    }
+}
+
+class Watcher {
+    constructor() {
+        Dep.target = this
+    }
+    update() {
+        console.log('属性更新了。。')
     }
 }
