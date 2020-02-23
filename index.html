@@ -8,7 +8,13 @@
 </head>
 <body>
     <div id="vue-cores">
+        <p>{{title}}</p>
+        <p>{{address.province}}</p>
+        <p c-text="title"></p>
+        <input type="text" c-model="title">
 
+        <p c-html="content"></p>
+        <button @click="handleBtn">function click</button>
     </div>
 
     <script type="text/javascript">
@@ -37,10 +43,22 @@
 
     <script type="text/javascript">
         const app = new CVue({
+            el: '#vue-cores',
             data: {
                 title: 'tianzhi',
                 address: {
                     province: "hubei"
+                },
+                content: '<button>click<button/>'
+            },
+            created() {
+                setTimeout(() => {
+                    this.title = 'chenged'
+                }, 1000)
+            },
+            method: {
+                handleBtn() {
+                    console.log('改变按钮状态')
                 }
             }
         })

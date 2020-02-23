@@ -2,7 +2,7 @@
  * @Author: tianzhi
  * @Date: 2020-02-19 21:13:59
  * @LastEditors  : tianzhi
- * @LastEditTime : 2020-02-20 12:07:15
+ * @LastEditTime : 2020-02-22 21:50:05
  */
 class CVue {
     constructor(options) {
@@ -11,9 +11,11 @@ class CVue {
         
         this.observe(this.$data)
 
-        new Watcher()
-        this.$data.title
-        this.$data.title = 'new val'
+        // new Watcher()
+        // this.$data.title
+        // this.$data.title = 'new val'
+
+        new Compile(options.el, )
     }
     observe(value) {
         if(!value || typeof value != 'object') {
@@ -24,7 +26,7 @@ class CVue {
             this.defineReactive(value, key, value[key])
         })
     }
-    // 设置代理 当访问this.title的时候 相当于改变this.$data.title
+    // 设置代理 当访问this.title的时候 相当于访问this.$data.title
     proxyData(key) {
         Object.defineProperty(this, key, {
             get() {
@@ -61,6 +63,9 @@ class CVue {
     }
 }
 
+/**
+ * 依赖收集
+ */
 class Dep {
     constructor() {
         this.deps = []
