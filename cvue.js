@@ -10,6 +10,10 @@ class CVue {
         // this.$data.title = 'new val'
 
         new Compile(options.el, this)
+
+        if(options.created) {
+            options.created.call(this)
+        }
     }
     observe(value) {
         if(!value || typeof value != 'object') {
@@ -73,10 +77,17 @@ class Dep {
 }
 
 class Watcher {
-    constructor() {
+    constructor(vm, key, callback) {
+        this.vm = vm
+        this.key = key
+        this.callback = callback
+
         Dep.target = this
+        this.vm[this.key]
+        Dep.target = null
     }
     update() {
-        console.log('属性更新了。。')
+        // console.log('属性更新了。。')
+        this.callback.call(this.vm, this.vm[this.key])
     }
 }

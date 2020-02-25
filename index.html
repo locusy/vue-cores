@@ -9,7 +9,7 @@
 <body>
     <div id="vue-cores">
         <p>{{title}}</p>
-        <p>{{address.province}}</p>
+        <p>{{address}}</p>
         <p c-text="title"></p>
         <input type="text" c-model="title">
 
@@ -25,19 +25,17 @@
             el: '#vue-cores',
             data: {
                 title: 'tianzhi',
-                address: {
-                    province: "hubei"
-                },
-                content: '<button>click<button/>'
+                address: 'hubei',
+                content: '<button>按钮<button/>'
             },
             created() {
                 setTimeout(() => {
                     this.title = 'chenged'
                 }, 1000)
             },
-            method: {
+            methods: {
                 handleBtn() {
-                    console.log('改变按钮状态')
+                    this.address = 'wuhan'
                 }
             }
         })
