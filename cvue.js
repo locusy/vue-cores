@@ -1,9 +1,3 @@
-/*
- * @Author: tianzhi
- * @Date: 2020-02-19 21:13:59
- * @LastEditors  : tianzhi
- * @LastEditTime : 2020-02-22 21:50:05
- */
 class CVue {
     constructor(options) {
         this.$options = options
@@ -15,7 +9,7 @@ class CVue {
         // this.$data.title
         // this.$data.title = 'new val'
 
-        new Compile(options.el, )
+        new Compile(options.el, this)
     }
     observe(value) {
         if(!value || typeof value != 'object') {

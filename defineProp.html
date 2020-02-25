@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="cores"></div>
+
+    <script type="text/javascript">
+        var obj = {}
+        Object.defineProperty(obj, 'name', {
+            configurable: true,  // 该属性描述符才能够被改变 该属性也能从对应的对象上被删除
+            enumerable: true, // 该属性能够出现在对象的枚举属性中
+            get() {
+                // console.log(this)
+                return document.querySelector("#cores").innerHTML
+            },
+            set(value) {
+                // console.log('value:', value)
+                document.querySelector('#cores').innerHTML = value
+            },
+            // 以下两种描述符不能和get set同时存在
+            // writable: true,
+            // value: 'lala'
+        })
+
+        obj.name = 'tiantian'
+        // console.log(obj.name)
+    </script>
+</body>
+</html>
