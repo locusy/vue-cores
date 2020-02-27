@@ -8,7 +8,6 @@ class CVue {
         // new Watcher()
         // this.$data.title
         // this.$data.title = 'new val'
-
         new Compile(options.el, this)
 
         if(options.created) {
