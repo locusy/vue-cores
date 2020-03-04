@@ -1,12 +1,43 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-    </div>
+    </div> -->
+
+    <nav id="nav1">
+      <router-link to="#/apple">apple</router-link>
+      <router-link to="#/berry">berry</router-link>
+    </nav>
+
+    <!-- 渲染组件内容 -->
     <router-view/>
+
+    <button @click="addNum">{{number}}</button>
+
   </div>
 </template>
+
+<script>
+import store from './cstore'
+
+export default {
+  created() {
+    console.log(store.state.number)
+  },
+  computed: {
+    number() {
+      return store.state.number
+    } 
+  },
+  methods: {
+    addNum() {
+      // store.commit('add')
+      store.dispatch('adder')
+    }
+  }
+}
+</script>
 
 <style>
 #app {

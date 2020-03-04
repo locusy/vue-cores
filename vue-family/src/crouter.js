@@ -2,26 +2,28 @@
  * @Author: tianzhi
  * @Date: 2020-03-02 23:36:43
  * @LastEditors: tianzhi
- * @LastEditTime: 2020-03-03 11:06:44
+ * @LastEditTime: 2020-03-03 15:26:04
  */
 import Vue from 'vue'
 
 class Crouter {
-    constructor(options) {
+    constructor(Vue, options) {
         this.$options = options
         this.routemap = {}
 
         // 将currentHash挂载在vue实例上 
         this.app = new Vue({
-            currentHash: '#/'
+            data: {
+                currentHash: '#/'
+            }
         })
 
         // 监听load和hashchange事件，获取当前的currentHash值
         this.init()
         // 生成routemap：键=>值  path=>component
         this.createRouteMap()
-        // 注册组件 根据当前currentHash值找到组件并编译成dom
-        this.initComponent()
+        // 注册组件 根据当前currentHash值找到并展示组件
+        this.initComponent(Vue)
     }
     
     init() {
@@ -38,12 +40,12 @@ class Crouter {
     }
 
     createRouteMap() {
-        options.routes.forEach(elem => {
+        this.$options.routes.forEach(elem => {
             this.routemap[elem.path] = elem.component
         })
     }
 
-    initComponent() {
+    initComponent(Vue) {
         Vue.component('router-link', {
             props: {
                 to: String
@@ -54,10 +56,11 @@ class Crouter {
                 return h('a', {attrs: {'href': this.to}}, this.$slots.default)
             }
         })
-        const _this = this
+        
+        let _this = this
         Vue.component('router-view', {
             render(h) {
-                const component = _this.routemap[_this.app.currentHash]
+                let component = _this.routemap[_this.app.currentHash]
                 return h(component)
             }
         })
@@ -68,18 +71,18 @@ class Crouter {
 const Apple =  {
     render() {
         return (
-            <div>apple</div>
+            <div>apple kaka</div>
         )
     }
 }
 const Berry = {
     render() {
         return (
-            <div>berry</div>
+            <div>berry lala</div>
         )
     }
 }
-export default new Crouter({
+export default new Crouter(Vue, {
     routes: [
         {
             path: '/apple',
