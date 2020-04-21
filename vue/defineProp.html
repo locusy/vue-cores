@@ -14,7 +14,7 @@
             configurable: true,  // 该属性描述符才能够被改变 该属性也能从对应的对象上被删除
             enumerable: true, // 该属性能够出现在对象的枚举属性中
             get() {
-                // console.log(this)
+                console.log(this)
                 return document.querySelector("#cores").innerHTML
             },
             set(value) {
@@ -27,7 +27,7 @@
         })
 
         obj.name = 'tiantian'
-        // console.log(obj.name)
+        console.log(obj.name)
     </script>
 </body>
 </html>
