@@ -54,7 +54,6 @@ class CVue {
                 }
             }
         })
-
         // 递归 让data里面内层的对象也可以响应
         this.observe(val)
     }
