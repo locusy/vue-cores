@@ -14,6 +14,7 @@ class CStore {
             }
         })
     }
+    
 
     commit(type, payload) {
         const mutation =  this.mutations[type]

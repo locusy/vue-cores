@@ -1,9 +1,3 @@
-/*
- * @Author: tianzhi
- * @Date: 2020-03-02 23:36:43
- * @LastEditors: tianzhi
- * @LastEditTime: 2020-03-03 15:26:04
- */
 import Vue from 'vue'
 
 class Crouter {
