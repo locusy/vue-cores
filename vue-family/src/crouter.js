@@ -61,7 +61,6 @@ class Crouter {
     }
 }
 
-
 const Apple =  {
     render() {
         return (
@@ -69,6 +68,7 @@ const Apple =  {
         )
     }
 }
+
 const Berry = {
     render() {
         return (
@@ -76,6 +76,7 @@ const Berry = {
         )
     }
 }
+
 export default new Crouter(Vue, {
     routes: [
         {
