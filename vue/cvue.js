@@ -15,7 +15,7 @@ class CVue {
         }
     }
     observe(value) {
-        if(!value || typeof value != 'object') {
+        if(!value || Object.prototype.toString.call(value) != '[object Object]') {
             return false;
         }
         Object.keys(value).map(key => {

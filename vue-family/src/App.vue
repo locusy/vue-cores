@@ -32,8 +32,9 @@ export default {
   },
   methods: {
     addNum() {
-      // store.commit('add')
-      store.dispatch('adder')
+      store.commit('add')
+      // store.dispatch('adder')
+      console.log('number:', this.number)
     }
   }
 }

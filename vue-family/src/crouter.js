@@ -26,12 +26,13 @@ class Crouter {
     }
 
     handleHashChange() {
-        this.app.currentHash = this.getHash()
+        // this.app.currentHash = this.getHash()
+        this.app.currentHash = window.location.hash.slice(1) || ''
     }
 
-    getHash() {
-        return window.location.hash.slice(1) || ''
-    }
+    // getHash() {
+    //     return window.location.hash.slice(1) || ''
+    // }
 
     createRouteMap() {
         this.$options.routes.forEach(elem => {
